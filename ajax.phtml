@@ -1,0 +1,68 @@
+<?php
+echo $this->headScript()
+    ->prependFile($this->basePath('js/call.js'));
+$datenull = '01/01/0001 00:01';
+?>
+<table class="myTable table">
+    <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Computador</th>
+        <th class="text-center">Sala de Aula</th>
+        <th class="text-center">Funcionário</th>
+        <th class="text-center">Examinado em</th>
+        <th  class="text-center">Fechado em</th>
+        <th class="text-center">Criado em</th>
+        <th class="text-center">Modificado em</th>
+    </tr>
+    <?php foreach ($this->data as $entity) :?>
+    <tr>
+        <td class="text-center"><?php echo $entity->getId();?></td>
+        <td class="text-center"><?php echo $entity->getComputer();?></td>
+        <td class="text-center"><?php echo $entity->getClassroom();?></td>
+        <td class="text-center"><?php echo $entity->getStaff();?></td>
+        <td class="text-center">
+        <?php
+        if(strtotime($datenull) == strtotime($entity->getExamined()))
+        {?>
+            <a href="<?php echo $this->url('Caos-admin-interna',
+                    array(
+                        'controller' => 'calls',
+                        'action' => 'examined',
+                        'id' => $entity->getId()
+                    )
+                );?>">
+                <div class="btn-primary">--/--/---- --:--</div></a>
+        <?php
+        }
+        else
+        {
+            echo $entity->getExamined();
+        }
+        ?>
+        </td>
+        <td class="text-center">
+            <?php
+            if(strtotime($datenull) == strtotime($entity->getClosed()))
+            {?>
+                <a href="<?php echo $this->url('Caos-admin-interna',
+                    array(
+                        'controller' => 'calls',
+                        'action' => 'closed',
+                        'id' => $entity->getId()
+                    )
+                );?>">
+                    <div class="btn-primary">--/--/---- --:--</div></a>
+                <?php
+            }
+            else
+            {
+                echo $entity->getClosed();
+            }
+            ?>
+        </td>
+        <td class="text-center"><?php echo $entity->getCreated();?></td>
+        <td class="text-center"><?php echo $entity->getModified();?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
