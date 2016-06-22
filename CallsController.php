@@ -40,11 +40,24 @@ class CallsController extends CRUDController
         $paginator->setDefaultItemCountPerPage(15);
         //echo '<pre>'; print_r($paginator);echo '</pre>';
         $viewModel = new ViewModel(array('data' => $paginator, 'page' => $page));
-        $this->layout('layout/empty.phtml');
         //$viewModel->setTerminal(true);
         return $viewModel;
     }
 
+    public function ajaxAction()
+    {
+        $list = $this->getEm()->getRepository($this->entity)->findCallBySchool($this->user->getId());
+
+        $page = $this->params()->fromRoute('page');
+        $paginator = new Paginator(new ArrayAdapter($list));
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setDefaultItemCountPerPage(15);
+        //echo '<pre>'; print_r($paginator);echo '</pre>';
+        $viewModel = new ViewModel(array('data' => $paginator, 'page' => $page));
+        $viewModel->setTerminal(true);
+        $this->layout('layout/empty.phtml');
+        return $viewModel;
+    }
     /**
      * @return JsonModel
      */
