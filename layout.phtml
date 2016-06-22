@@ -1,0 +1,60 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="pt_BR">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('CaOS - Sistema de Abertura de Chamados') ?>
+
+        <?php echo $this->headMeta()
+            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <!-- Le styles -->
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath('css1/style.css'))
+                        ->prependStylesheet($this->basePath('css1/bootstrap-theme.min.css'))
+                        ->prependStylesheet($this->basePath('css1/bootstrap.min.css')) ?>
+
+        <!-- Scripts -->
+            <?php echo $this->headScript()
+                ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery.min.js'))
+            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ; ?>
+
+    </head>
+    <body>
+    <?php
+    if ($this->UserIdentity('CaosAdmin')) :
+    ?>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="<?php echo $this->url('Caos-admin-interna', array('controller' => 'staffs', 'action' => 'edit', 'id' => $this->UserIdentity('CaosAdmin')->getId()));?>"><?php echo 'Bem Vindo ' . $this->UserIdentity('CaosAdmin')->getName();?></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin', array('controller' => 'calls')) ?>">Chamadas</a></li>
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin', array('controller' => 'classrooms')) ?>">Salas de Aula</a></li>
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin', array('controller' => 'schools')) ?>">Escolas</a></li>
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin', array('controller' => 'computers')) ?>">Computadores</a></li>
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin', array('controller' => 'staffs')) ?>">Funcionários</a></li>
+                        <li class="active"><a href="<?php echo $this->url('Caos-admin-logout') ?>">Sair</a></li>
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    <?php endif ?>
+        <div class="container">
+            <?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy; <?php echo date('Y') ?> por Everton Luis Esteves. Todos os direitos reservados.</p>
+            </footer>
+        </div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>
