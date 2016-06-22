@@ -20,6 +20,7 @@
             <?php echo $this->headScript()
                 ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery.min.js'))
+                ->prependFile($this->basePath('js/call.js'))
             ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
             ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
         ; ?>
@@ -49,7 +50,9 @@
         </nav>
     <?php endif ?>
         <div class="container">
-            <?php echo $this->content; ?>
+            <?php
+            echo $this->content;
+            ?>
             <hr>
             <footer>
                 <p>&copy; <?php echo date('Y') ?> por Everton Luis Esteves. Todos os direitos reservados.</p>

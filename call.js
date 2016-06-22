@@ -6,13 +6,13 @@ function refresh()
             url: '/admin/calls/ajax',
             type: 'POST',
             success: function (data, textStatus) {
-                $(".myTable").replaceWith(data);
+                alert('Sucesso');
             },
             error: function () {
                 alert('Falhou!!!');
             }
         })
-    }, 10000)
+    }, 1000)
 }
 $(document).ready(function () {
     refresh();

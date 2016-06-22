@@ -55,7 +55,7 @@ class CallsController extends CRUDController
         //echo '<pre>'; print_r($paginator);echo '</pre>';
         $viewModel = new ViewModel(array('data' => $paginator, 'page' => $page));
         $viewModel->setTerminal(true);
-        $this->layout('layout/empty.phtml');
+        //$this->layout('layout/empty.phtml');
         return $viewModel;
     }
     /**
